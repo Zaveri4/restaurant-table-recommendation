@@ -125,3 +125,147 @@ databaseChangeLog:
             constraintName: fk_reservation_table_id
             referencedTableName: restaurant_table
             referencedColumnNames: id
+  - changeSet:
+      id: 004-seed-restaurant-tables
+      author: rumeln
+      changes:
+        - insert:
+            tableName: restaurant_table
+            columns:
+              - column: { name: name, value: T01 }
+              - column: { name: capacity, valueNumeric: 2 }
+              - column: { name: zone, value: MAIN }
+              - column: { name: x_position, valueNumeric: 1 }
+              - column: { name: y_position, valueNumeric: 1 }
+              - column: { name: width, valueNumeric: 2 }
+              - column: { name: height, valueNumeric: 2 }
+              - column: { name: window_side, valueBoolean: false }
+              - column: { name: quiet_area, valueBoolean: false }
+              - column: { name: accessible, valueBoolean: true }
+              - column: { name: near_play_area, valueBoolean: false }
+        - insert:
+            tableName: restaurant_table
+            columns:
+              - column: { name: name, value: T02 }
+              - column: { name: capacity, valueNumeric: 2 }
+              - column: { name: zone, value: QUIET }
+              - column: { name: x_position, valueNumeric: 4 }
+              - column: { name: y_position, valueNumeric: 1 }
+              - column: { name: width, valueNumeric: 2 }
+              - column: { name: height, valueNumeric: 2 }
+              - column: { name: window_side, valueBoolean: false }
+              - column: { name: quiet_area, valueBoolean: true }
+              - column: { name: accessible, valueBoolean: true }
+              - column: { name: near_play_area, valueBoolean: false }
+        - insert:
+            tableName: restaurant_table
+            columns:
+              - column: { name: name, value: T03 }
+              - column: { name: capacity, valueNumeric: 2 }
+              - column: { name: zone, value: WINDOW }
+              - column: { name: x_position, valueNumeric: 7 }
+              - column: { name: y_position, valueNumeric: 1 }
+              - column: { name: width, valueNumeric: 2 }
+              - column: { name: height, valueNumeric: 2 }
+              - column: { name: window_side, valueBoolean: true }
+              - column: { name: quiet_area, valueBoolean: false }
+              - column: { name: accessible, valueBoolean: false }
+              - column: { name: near_play_area, valueBoolean: false }
+        - insert:
+            tableName: restaurant_table
+            columns:
+              - column: { name: name, value: T04 }
+              - column: { name: capacity, valueNumeric: 4 }
+              - column: { name: zone, value: MAIN }
+              - column: { name: x_position, valueNumeric: 1 }
+              - column: { name: y_position, valueNumeric: 4 }
+              - column: { name: width, valueNumeric: 3 }
+              - column: { name: height, valueNumeric: 2 }
+              - column: { name: window_side, valueBoolean: false }
+              - column: { name: quiet_area, valueBoolean: false }
+              - column: { name: accessible, valueBoolean: true }
+              - column: { name: near_play_area, valueBoolean: true }
+        - insert:
+            tableName: restaurant_table
+            columns:
+              - column: { name: name, value: T05 }
+              - column: { name: capacity, valueNumeric: 4 }
+              - column: { name: zone, value: MAIN }
+              - column: { name: x_position, valueNumeric: 5 }
+              - column: { name: y_position, valueNumeric: 4 }
+              - column: { name: width, valueNumeric: 3 }
+              - column: { name: height, valueNumeric: 2 }
+              - column: { name: window_side, valueBoolean: false }
+              - column: { name: quiet_area, valueBoolean: false }
+              - column: { name: accessible, valueBoolean: true }
+              - column: { name: near_play_area, valueBoolean: false }
+        - insert:
+            tableName: restaurant_table
+            columns:
+              - column: { name: name, value: T06 }
+              - column: { name: capacity, valueNumeric: 4 }
+              - column: { name: zone, value: QUIET }
+              - column: { name: x_position, valueNumeric: 9 }
+              - column: { name: y_position, valueNumeric: 4 }
+              - column: { name: width, valueNumeric: 3 }
+              - column: { name: height, valueNumeric: 2 }
+              - column: { name: window_side, valueBoolean: false }
+              - column: { name: quiet_area, valueBoolean: true }
+              - column: { name: accessible, valueBoolean: true }
+              - column: { name: near_play_area, valueBoolean: false }
+        - insert:
+            tableName: restaurant_table
+            columns:
+              - column: { name: name, value: T07 }
+              - column: { name: capacity, valueNumeric: 4 }
+              - column: { name: zone, value: WINDOW }
+              - column: { name: x_position, valueNumeric: 13 }
+              - column: { name: y_position, valueNumeric: 4 }
+              - column: { name: width, valueNumeric: 3 }
+              - column: { name: height, valueNumeric: 2 }
+              - column: { name: window_side, valueBoolean: true }
+              - column: { name: quiet_area, valueBoolean: false }
+              - column: { name: accessible, valueBoolean: false }
+              - column: { name: near_play_area, valueBoolean: false }
+        - insert:
+            tableName: restaurant_table
+            columns:
+              - column: { name: name, value: T08 }
+              - column: { name: capacity, valueNumeric: 6 }
+              - column: { name: zone, value: MAIN }
+              - column: { name: x_position, valueNumeric: 2 }
+              - column: { name: y_position, valueNumeric: 7 }
+              - column: { name: width, valueNumeric: 4 }
+              - column: { name: height, valueNumeric: 3 }
+              - column: { name: window_side, valueBoolean: false }
+              - column: { name: quiet_area, valueBoolean: false }
+              - column: { name: accessible, valueBoolean: true }
+              - column: { name: near_play_area, valueBoolean: true }
+        - insert:
+            tableName: restaurant_table
+            columns:
+              - column: { name: name, value: T09 }
+              - column: { name: capacity, valueNumeric: 6 }
+              - column: { name: zone, value: QUIET }
+              - column: { name: x_position, valueNumeric: 8 }
+              - column: { name: y_position, valueNumeric: 7 }
+              - column: { name: width, valueNumeric: 4 }
+              - column: { name: height, valueNumeric: 3 }
+              - column: { name: window_side, valueBoolean: false }
+              - column: { name: quiet_area, valueBoolean: true }
+              - column: { name: accessible, valueBoolean: true }
+              - column: { name: near_play_area, valueBoolean: false }
+        - insert:
+            tableName: restaurant_table
+            columns:
+              - column: { name: name, value: T10 }
+              - column: { name: capacity, valueNumeric: 8 }
+              - column: { name: zone, value: WINDOW }
+              - column: { name: x_position, valueNumeric: 13 }
+              - column: { name: y_position, valueNumeric: 8 }
+              - column: { name: width, valueNumeric: 5 }
+              - column: { name: height, valueNumeric: 3 }
+              - column: { name: window_side, valueBoolean: true }
+              - column: { name: quiet_area, valueBoolean: false }
+              - column: { name: accessible, valueBoolean: true }
+              - column: { name: near_play_area, valueBoolean: false }
