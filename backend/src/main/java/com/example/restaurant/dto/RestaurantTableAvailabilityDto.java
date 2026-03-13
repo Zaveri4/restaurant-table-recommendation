@@ -2,7 +2,7 @@ package com.example.restaurant.dto;
 
 import com.example.restaurant.entity.RestaurantZone;
 
-public record RestaurantTableDto (
+public record RestaurantTableAvailabilityDto (
         Long id,
         String name,
         Integer capacity,
@@ -14,6 +14,7 @@ public record RestaurantTableDto (
         Boolean windowSide,
         Boolean quietArea,
         Boolean accessible,
-        Boolean nearPlayArea
+        Boolean nearPlayArea,
+        Boolean occupied
 ) {
 }

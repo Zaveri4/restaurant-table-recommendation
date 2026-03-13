@@ -269,3 +269,71 @@ databaseChangeLog:
               - column: { name: quiet_area, valueBoolean: false }
               - column: { name: accessible, valueBoolean: true }
               - column: { name: near_play_area, valueBoolean: false }
+  - changeSet:
+      id: 005-seed-reservations
+      author: rumeln
+      changes:
+        - insert:
+            tableName: reservation
+            columns:
+              - column: { name: table_id, valueComputed: "(SELECT id FROM restaurant_table WHERE name = 'T01')" }
+              - column: { name: reservation_date, valueComputed: "CURRENT_DATE" }
+              - column: { name: start_time, value: "18:00:00" }
+              - column: { name: end_time, value: "19:30:00" }
+              - column: { name: party_size, valueNumeric: 2 }
+        - insert:
+            tableName: reservation
+            columns:
+              - column: { name: table_id, valueComputed: "(SELECT id FROM restaurant_table WHERE name = 'T04')" }
+              - column: { name: reservation_date, valueComputed: "CURRENT_DATE" }
+              - column: { name: start_time, value: "18:30:00" }
+              - column: { name: end_time, value: "20:00:00" }
+              - column: { name: party_size, valueNumeric: 4 }
+        - insert:
+            tableName: reservation
+            columns:
+              - column: { name: table_id, valueComputed: "(SELECT id FROM restaurant_table WHERE name = 'T07')" }
+              - column: { name: reservation_date, valueComputed: "CURRENT_DATE" }
+              - column: { name: start_time, value: "19:00:00" }
+              - column: { name: end_time, value: "21:00:00" }
+              - column: { name: party_size, valueNumeric: 3 }
+        - insert:
+            tableName: reservation
+            columns:
+              - column: { name: table_id, valueComputed: "(SELECT id FROM restaurant_table WHERE name = 'T10')" }
+              - column: { name: reservation_date, valueComputed: "CURRENT_DATE" }
+              - column: { name: start_time, value: "20:00:00" }
+              - column: { name: end_time, value: "22:00:00" }
+              - column: { name: party_size, valueNumeric: 7 }
+        - insert:
+            tableName: reservation
+            columns:
+              - column: { name: table_id, valueComputed: "(SELECT id FROM restaurant_table WHERE name = 'T02')" }
+              - column: { name: reservation_date, valueComputed: "(CURRENT_DATE + INTERVAL '1 day')::date" }
+              - column: { name: start_time, value: "18:00:00" }
+              - column: { name: end_time, value: "19:00:00" }
+              - column: { name: party_size, valueNumeric: 2 }
+        - insert:
+            tableName: reservation
+            columns:
+              - column: { name: table_id, valueComputed: "(SELECT id FROM restaurant_table WHERE name = 'T05')" }
+              - column: { name: reservation_date, valueComputed: "(CURRENT_DATE + INTERVAL '1 day')::date" }
+              - column: { name: start_time, value: "19:00:00" }
+              - column: { name: end_time, value: "20:30:00" }
+              - column: { name: party_size, valueNumeric: 4 }
+        - insert:
+            tableName: reservation
+            columns:
+              - column: { name: table_id, valueComputed: "(SELECT id FROM restaurant_table WHERE name = 'T08')" }
+              - column: { name: reservation_date, valueComputed: "(CURRENT_DATE + INTERVAL '1 day')::date" }
+              - column: { name: start_time, value: "18:30:00" }
+              - column: { name: end_time, value: "20:30:00" }
+              - column: { name: party_size, valueNumeric: 5 }
+        - insert:
+            tableName: reservation
+            columns:
+              - column: { name: table_id, valueComputed: "(SELECT id FROM restaurant_table WHERE name = 'T09')" }
+              - column: { name: reservation_date, valueComputed: "(CURRENT_DATE + INTERVAL '1 day')::date" }
+              - column: { name: start_time, value: "21:00:00" }
+              - column: { name: end_time, value: "22:30:00" }
+              - column: { name: party_size, valueNumeric: 6 }
