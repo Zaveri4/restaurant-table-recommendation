@@ -101,28 +101,82 @@ h1 span {
   color: #f8fafc;
 }
 
-.grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 20px;
-}
-
-.grid article {
+.layout-card {
   padding: 20px 22px;
   background: rgba(255, 255, 255, 0.8);
   border-radius: 16px;
   border: 1px solid rgba(148, 163, 184, 0.25);
   backdrop-filter: blur(8px);
+  max-width: 980px;
 }
 
-.grid h2 {
+.layout-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+}
+
+.layout-head h2 {
   margin: 0 0 8px;
   font-size: 18px;
 }
 
-.grid p {
+.legend {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  color: #475569;
+}
+
+.legend-swatch {
+  width: 16px;
+  height: 16px;
+  border-radius: 4px;
+  background: #0ea5e9;
+  border: 1px solid rgba(15, 23, 42, 0.2);
+}
+
+.empty-state {
   margin: 0;
   color: #475569;
+}
+
+.layout-canvas {
+  margin-top: 12px;
+  overflow-x: auto;
+  border: 1px solid rgba(148, 163, 184, 0.25);
+  border-radius: 12px;
+  background: #ffffff;
+}
+
+.layout-svg {
+  display: block;
+  width: 100%;
+  min-width: 520px;
+  height: auto;
+}
+
+.table-rect {
+  stroke: rgba(15, 23, 42, 0.4);
+  stroke-width: 1.5;
+}
+
+.table-name {
+  fill: #f8fafc;
+  font-size: 13px;
+  font-weight: 700;
+  text-anchor: middle;
+  font-family: "Space Grotesk", "Segoe UI", sans-serif;
+}
+
+.table-meta {
+  fill: rgba(241, 245, 249, 0.95);
+  font-size: 11px;
+  font-weight: 500;
+  text-anchor: middle;
+  font-family: "JetBrains Mono", "Consolas", monospace;
 }
 
 @media (max-width: 720px) {
