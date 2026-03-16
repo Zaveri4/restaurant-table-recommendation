@@ -1,19 +1,5 @@
+import type { RestaurantTable } from "../types";
 const API_BASE = import.meta.env.VITE_API_BASE ?? "";
-
-export type RestaurantTable = {
-  id: number;
-  name: string;
-  capacity: number;
-  zone: "MAIN" | "QUIET" | "WINDOW";
-  xPosition: number;
-  yPosition: number;
-  width: number;
-  height: number;
-  windowSide: boolean;
-  quietArea: boolean;
-  accessible: boolean;
-  nearPlayArea: boolean;
-};
 
 const RETRY_ATTEMPTS = 10;
 const RETRY_DELAY_MS = 1_000;
