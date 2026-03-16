@@ -1,18 +1,357 @@
 databaseChangeLog:
   - changeSet:
-      id: 001-create-table
-      author: you
+      id: 001-create-restaurant-table
+      author: rumeln
       changes:
         - createTable:
-            tableName: example
+            tableName: restaurant_table
             columns:
               - column:
                   name: id
-                  type: bigserial
+                  type: BIGINT
+                  autoIncrement: true
                   constraints:
                     primaryKey: true
+                    primaryKeyName: pk_restaurant_table
               - column:
                   name: name
-                  type: varchar(255)
+                  type: VARCHAR(50)
                   constraints:
                     nullable: false
+                    unique: true
+              - column:
+                  name: capacity
+                  type: INT
+                  constraints:
+                    nullable: false
+                    checkConstraint: capacity > 0
+              - column:
+                  name: zone
+                  type: VARCHAR(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: x_position
+                  type: INT
+                  constraints:
+                    nullable: false
+                    checkConstraint: x_position >= 0
+              - column:
+                  name: y_position
+                  type: INT
+                  constraints:
+                    nullable: false
+                    checkConstraint: y_position >= 0
+              - column:
+                  name: width
+                  type: INT
+                  constraints:
+                    nullable: false
+                    checkConstraint: width > 0
+              - column:
+                  name: height
+                  type: INT
+                  constraints:
+                    nullable: false
+                    checkConstraint: height > 0
+              - column:
+                  name: window_side
+                  type: BOOLEAN
+                  constraints:
+                    nullable: false
+              - column:
+                  name: quiet_area
+                  type: BOOLEAN
+                  constraints:
+                    nullable: false
+              - column:
+                  name: accessible
+                  type: BOOLEAN
+                  constraints:
+                    nullable: false
+              - column:
+                  name: near_play_area
+                  type: BOOLEAN
+                  constraints:
+                    nullable: false
+  - changeSet:
+      id: 002-create-reservation-table
+      author: rumeln
+      changes:
+        - createTable:
+            tableName: reservation
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: pk_reservation
+              - column:
+                  name: table_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: reservation_date
+                  type: DATE
+                  constraints:
+                    nullable: false
+              - column:
+                  name: start_time
+                  type: TIME
+                  constraints:
+                    nullable: false
+              - column:
+                  name: end_time
+                  type: TIME
+                  constraints:
+                    nullable: false
+                    checkConstraint: end_time > start_time
+              - column:
+                  name: party_size
+                  type: INT
+                  constraints:
+                    nullable: false
+                    checkConstraint: party_size > 0
+  - changeSet:
+      id: 003-add-reservation-table-fk
+      author: rumeln
+      changes:
+        - addForeignKeyConstraint:
+            baseTableName: reservation
+            baseColumnNames: table_id
+            constraintName: fk_reservation_table_id
+            referencedTableName: restaurant_table
+            referencedColumnNames: id
+  - changeSet:
+      id: 004-seed-restaurant-tables
+      author: rumeln
+      changes:
+        - insert:
+            tableName: restaurant_table
+            columns:
+              - column: { name: name, value: T01 }
+              - column: { name: capacity, valueNumeric: "2" }
+              - column: { name: zone, value: MAIN }
+              - column: { name: x_position, valueNumeric: "1" }
+              - column: { name: y_position, valueNumeric: "1" }
+              - column: { name: width, valueNumeric: "2" }
+              - column: { name: height, valueNumeric: "2" }
+              - column: { name: window_side, valueBoolean: "false" }
+              - column: { name: quiet_area, valueBoolean: "false" }
+              - column: { name: accessible, valueBoolean: "true" }
+              - column: { name: near_play_area, valueBoolean: "false" }
+        - insert:
+            tableName: restaurant_table
+            columns:
+              - column: { name: name, value: T02 }
+              - column: { name: capacity, valueNumeric: "2" }
+              - column: { name: zone, value: QUIET }
+              - column: { name: x_position, valueNumeric: "4" }
+              - column: { name: y_position, valueNumeric: "1" }
+              - column: { name: width, valueNumeric: "2" }
+              - column: { name: height, valueNumeric: "2" }
+              - column: { name: window_side, valueBoolean: "false" }
+              - column: { name: quiet_area, valueBoolean: "true" }
+              - column: { name: accessible, valueBoolean: "true" }
+              - column: { name: near_play_area, valueBoolean: "false" }
+        - insert:
+            tableName: restaurant_table
+            columns:
+              - column: { name: name, value: T03 }
+              - column: { name: capacity, valueNumeric: "2" }
+              - column: { name: zone, value: WINDOW }
+              - column: { name: x_position, valueNumeric: "7" }
+              - column: { name: y_position, valueNumeric: "1" }
+              - column: { name: width, valueNumeric: "2" }
+              - column: { name: height, valueNumeric: "2" }
+              - column: { name: window_side, valueBoolean: "true" }
+              - column: { name: quiet_area, valueBoolean: "false" }
+              - column: { name: accessible, valueBoolean: "false" }
+              - column: { name: near_play_area, valueBoolean: "false" }
+        - insert:
+            tableName: restaurant_table
+            columns:
+              - column: { name: name, value: T04 }
+              - column: { name: capacity, valueNumeric: "4" }
+              - column: { name: zone, value: MAIN }
+              - column: { name: x_position, valueNumeric: "1" }
+              - column: { name: y_position, valueNumeric: "4" }
+              - column: { name: width, valueNumeric: "3" }
+              - column: { name: height, valueNumeric: "2" }
+              - column: { name: window_side, valueBoolean: "false" }
+              - column: { name: quiet_area, valueBoolean: "false" }
+              - column: { name: accessible, valueBoolean: "true" }
+              - column: { name: near_play_area, valueBoolean: "true" }
+        - insert:
+            tableName: restaurant_table
+            columns:
+              - column: { name: name, value: T05 }
+              - column: { name: capacity, valueNumeric: "4" }
+              - column: { name: zone, value: MAIN }
+              - column: { name: x_position, valueNumeric: "5" }
+              - column: { name: y_position, valueNumeric: "4" }
+              - column: { name: width, valueNumeric: "3" }
+              - column: { name: height, valueNumeric: "2" }
+              - column: { name: window_side, valueBoolean: "false" }
+              - column: { name: quiet_area, valueBoolean: "false" }
+              - column: { name: accessible, valueBoolean: "true" }
+              - column: { name: near_play_area, valueBoolean: "false" }
+        - insert:
+            tableName: restaurant_table
+            columns:
+              - column: { name: name, value: T06 }
+              - column: { name: capacity, valueNumeric: "4" }
+              - column: { name: zone, value: QUIET }
+              - column: { name: x_position, valueNumeric: "9" }
+              - column: { name: y_position, valueNumeric: "4" }
+              - column: { name: width, valueNumeric: "3" }
+              - column: { name: height, valueNumeric: "2" }
+              - column: { name: window_side, valueBoolean: "false" }
+              - column: { name: quiet_area, valueBoolean: "true" }
+              - column: { name: accessible, valueBoolean: "true" }
+              - column: { name: near_play_area, valueBoolean: "false" }
+        - insert:
+            tableName: restaurant_table
+            columns:
+              - column: { name: name, value: T07 }
+              - column: { name: capacity, valueNumeric: "4" }
+              - column: { name: zone, value: WINDOW }
+              - column: { name: x_position, valueNumeric: "13" }
+              - column: { name: y_position, valueNumeric: "4" }
+              - column: { name: width, valueNumeric: "3" }
+              - column: { name: height, valueNumeric: "2" }
+              - column: { name: window_side, valueBoolean: "true" }
+              - column: { name: quiet_area, valueBoolean: "false" }
+              - column: { name: accessible, valueBoolean: "false" }
+              - column: { name: near_play_area, valueBoolean: "false" }
+        - insert:
+            tableName: restaurant_table
+            columns:
+              - column: { name: name, value: T08 }
+              - column: { name: capacity, valueNumeric: "6" }
+              - column: { name: zone, value: MAIN }
+              - column: { name: x_position, valueNumeric: "2" }
+              - column: { name: y_position, valueNumeric: "7" }
+              - column: { name: width, valueNumeric: "4" }
+              - column: { name: height, valueNumeric: "3" }
+              - column: { name: window_side, valueBoolean: "false" }
+              - column: { name: quiet_area, valueBoolean: "false" }
+              - column: { name: accessible, valueBoolean: "true" }
+              - column: { name: near_play_area, valueBoolean: "true" }
+        - insert:
+            tableName: restaurant_table
+            columns:
+              - column: { name: name, value: T09 }
+              - column: { name: capacity, valueNumeric: "6" }
+              - column: { name: zone, value: QUIET }
+              - column: { name: x_position, valueNumeric: "8" }
+              - column: { name: y_position, valueNumeric: "7" }
+              - column: { name: width, valueNumeric: "4" }
+              - column: { name: height, valueNumeric: "3" }
+              - column: { name: window_side, valueBoolean: "false" }
+              - column: { name: quiet_area, valueBoolean: "true" }
+              - column: { name: accessible, valueBoolean: "true" }
+              - column: { name: near_play_area, value: "false" }
+        - insert:
+            tableName: restaurant_table
+            columns:
+              - column: { name: name, value: T10 }
+              - column: { name: capacity, value: "8" }
+              - column: { name: zone, value: WINDOW }
+              - column: { name: x_position, value: "13" }
+              - column: { name: y_position, value: "8" }
+              - column: { name: width, value: "5" }
+              - column: { name: height, value: "3" }
+              - column: { name: window_side, value: "true" }
+              - column: { name: quiet_area, value: "false" }
+              - column: { name: accessible, value: "true" }
+              - column: { name: near_play_area, value: "false" }
+  - changeSet:
+      id: 005-seed-reservations
+      author: rumeln
+      changes:
+        - insert:
+            tableName: reservation
+            columns:
+              - column: { name: table_id, valueComputed: "(SELECT id FROM restaurant_table WHERE name = 'T01')" }
+              - column: { name: reservation_date, valueComputed: "CURRENT_DATE" }
+              - column: { name: start_time, value: "18:00:00" }
+              - column: { name: end_time, value: "19:30:00" }
+              - column: { name: party_size, valueNumeric: "2" }
+        - insert:
+            tableName: reservation
+            columns:
+              - column: { name: table_id, valueComputed: "(SELECT id FROM restaurant_table WHERE name = 'T04')" }
+              - column: { name: reservation_date, valueComputed: "CURRENT_DATE" }
+              - column: { name: start_time, value: "18:30:00" }
+              - column: { name: end_time, value: "20:00:00" }
+              - column: { name: party_size, valueNumeric: "4" }
+        - insert:
+            tableName: reservation
+            columns:
+              - column: { name: table_id, valueComputed: "(SELECT id FROM restaurant_table WHERE name = 'T07')" }
+              - column: { name: reservation_date, valueComputed: "CURRENT_DATE" }
+              - column: { name: start_time, value: "19:00:00" }
+              - column: { name: end_time, value: "21:00:00" }
+              - column: { name: party_size, valueNumeric: "3" }
+        - insert:
+            tableName: reservation
+            columns:
+              - column: { name: table_id, valueComputed: "(SELECT id FROM restaurant_table WHERE name = 'T10')" }
+              - column: { name: reservation_date, valueComputed: "CURRENT_DATE" }
+              - column: { name: start_time, value: "20:00:00" }
+              - column: { name: end_time, value: "22:00:00" }
+              - column: { name: party_size, valueNumeric: "7" }
+        - insert:
+            tableName: reservation
+            columns:
+              - column: { name: table_id, valueComputed: "(SELECT id FROM restaurant_table WHERE name = 'T02')" }
+              - column: { name: reservation_date, valueComputed: "(CURRENT_DATE + INTERVAL '1 day')::date" }
+              - column: { name: start_time, value: "18:00:00" }
+              - column: { name: end_time, value: "19:00:00" }
+              - column: { name: party_size, valueNumeric: "2" }
+        - insert:
+            tableName: reservation
+            columns:
+              - column: { name: table_id, valueComputed: "(SELECT id FROM restaurant_table WHERE name = 'T05')" }
+              - column: { name: reservation_date, valueComputed: "(CURRENT_DATE + INTERVAL '1 day')::date" }
+              - column: { name: start_time, value: "19:00:00" }
+              - column: { name: end_time, value: "20:30:00" }
+              - column: { name: party_size, valueNumeric: "4" }
+        - insert:
+            tableName: reservation
+            columns:
+              - column: { name: table_id, valueComputed: "(SELECT id FROM restaurant_table WHERE name = 'T08')" }
+              - column: { name: reservation_date, valueComputed: "(CURRENT_DATE + INTERVAL '1 day')::date" }
+              - column: { name: start_time, value: "18:30:00" }
+              - column: { name: end_time, value: "20:30:00" }
+              - column: { name: party_size, valueNumeric: "5" }
+        - insert:
+            tableName: reservation
+            columns:
+              - column: { name: table_id, valueComputed: "(SELECT id FROM restaurant_table WHERE name = 'T09')" }
+              - column: { name: reservation_date, valueComputed: "(CURRENT_DATE + INTERVAL '1 day')::date" }
+              - column: { name: start_time, value: "21:00:00" }
+              - column: { name: end_time, value: "22:30:00" }
+              - column: { name: party_size, valueNumeric: "6" }
+  - changeSet:
+      id: 006-migrate-zone-values
+      author: rumeln
+      changes:
+        - update:
+            tableName: restaurant_table
+            columns:
+              - column:
+                  name: zone
+                  value: PRIVATE
+            where: zone = 'QUIET'
+        - update:
+            tableName: restaurant_table
+            columns:
+              - column:
+                  name: zone
+                  value: TERRACE
+            where: zone = 'WINDOW'
