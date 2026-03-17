@@ -1,6 +1,7 @@
 package com.example.restaurant.search;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
@@ -18,6 +19,8 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.server.ResponseStatusException;
 
 @ExtendWith(MockitoExtension.class)
 class SearchServiceTest {
@@ -150,6 +153,19 @@ class SearchServiceTest {
         assertThat(result.recommendedTable()).isNotNull();
         assertThat(result.recommendedTable().id()).isEqualTo(2L);
         assertThat(result.recommendedTable().reasons()).doesNotContain("Accessible table");
+    }
+
+    @Test
+    void unsupportedZoneValueReturnsBadRequest() {
+        SearchTablesRequestDto request = request(4, "INVALID_ZONE", null, null, null, null);
+
+        assertThatThrownBy(() -> searchService.searchTables(request))
+                .isInstanceOf(ResponseStatusException.class)
+                .satisfies(ex -> {
+                    ResponseStatusException responseException = (ResponseStatusException) ex;
+                    assertThat(responseException.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
+                    assertThat(responseException.getReason()).contains("Unsupported zone value");
+                });
     }
 
     private SearchTablesRequestDto request(
