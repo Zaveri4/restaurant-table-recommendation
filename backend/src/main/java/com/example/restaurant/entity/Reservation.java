@@ -41,4 +41,20 @@ public class Reservation {
 
     @Column(name = "party_size", nullable = false)
     private Integer partySize;
+
+    public static Reservation of(
+            RestaurantTable restaurantTable,
+            LocalDate reservationDate,
+            LocalTime startTime,
+            LocalTime endTime,
+            Integer partySize
+    ) {
+        Reservation reservation = new Reservation();
+        reservation.setRestaurantTable(restaurantTable);
+        reservation.setReservationDate(reservationDate);
+        reservation.setStartTime(startTime);
+        reservation.setEndTime(endTime);
+        reservation.setPartySize(partySize);
+        return reservation;
+    }
 }

@@ -7,6 +7,13 @@
   font-weight: 400;
   color: #0f172a;
   background-color: #f8fafc;
+  --space-1: 8px;
+  --space-2: 12px;
+  --space-3: 16px;
+  --space-4: 20px;
+  --space-5: 24px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
 }
 
 * {
@@ -26,14 +33,14 @@ body {
   display: flex;
   flex-direction: column;
   padding: 72px clamp(24px, 6vw, 120px) 80px;
-  gap: 48px;
+  gap: 40px;
 }
 
 .hero {
   display: flex;
   flex-direction: column;
-  gap: 20px;
-  max-width: 720px;
+  gap: var(--space-4);
+  max-width: 980px;
 }
 
 .eyebrow {
@@ -65,12 +72,17 @@ h1 span {
 .status-card {
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  padding: 20px 24px;
-  background: #ffffff;
+  align-items: flex-start;
+  gap: var(--space-4);
+  padding: var(--space-4) var(--space-5);
+  background: linear-gradient(135deg, #ffffff, #f8fafc);
   border-radius: 20px;
   box-shadow: 0 18px 40px rgba(15, 23, 42, 0.12);
   border: 1px solid rgba(148, 163, 184, 0.2);
+}
+
+.status-main {
+  min-width: 0;
 }
 
 .label {
@@ -93,32 +105,67 @@ h1 span {
   color: #64748b;
 }
 
-.chip {
-  font-family: "JetBrains Mono", "Consolas", monospace;
-  padding: 10px 16px;
-  border-radius: 999px;
-  background: #0f172a;
-  color: #f8fafc;
+.hero-stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(90px, 1fr));
+  gap: var(--space-2);
+  width: min(360px, 100%);
+}
+
+.hero-stat {
+  border: 1px solid rgba(148, 163, 184, 0.35);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.95);
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.hero-stat-label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #64748b;
+}
+
+.hero-stat-value {
+  font-size: 20px;
+  line-height: 1.2;
+  color: #0f172a;
 }
 
 .search-card {
-  padding: 20px 22px;
+  padding: var(--space-4) var(--space-5);
   background: rgba(255, 255, 255, 0.85);
-  border-radius: 16px;
+  border-radius: var(--radius-lg);
   border: 1px solid rgba(148, 163, 184, 0.25);
   backdrop-filter: blur(8px);
   height: fit-content;
 }
 
+.section-head {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
 .search-card h2 {
-  margin: 0 0 16px;
+  margin: 0;
   font-size: 18px;
+}
+
+.section-subtitle {
+  margin: 0;
+  font-size: 13px;
+  color: #64748b;
 }
 
 .search-form {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  gap: 14px;
+  gap: var(--space-2);
+  margin-top: var(--space-3);
 }
 
 .search-form label {
@@ -127,6 +174,13 @@ h1 span {
   gap: 6px;
   font-size: 13px;
   color: #334155;
+}
+
+.field-label {
+  font-size: 12px;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: #475569;
 }
 
 .search-form input,
@@ -162,10 +216,10 @@ h1 span {
 }
 
 .search-result {
-  margin-top: 18px;
+  margin-top: var(--space-4);
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: var(--space-2);
 }
 
 .search-result h3 {
@@ -175,8 +229,8 @@ h1 span {
 
 .result-card {
   border: 1px solid rgba(148, 163, 184, 0.3);
-  border-radius: 12px;
-  padding: 12px 14px;
+  border-radius: var(--radius-md);
+  padding: var(--space-2) 14px;
   background: #fff;
   color: #334155;
 }
@@ -197,10 +251,43 @@ h1 span {
   color: #0f172a;
 }
 
+.result-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: var(--space-2);
+}
+
+.result-score {
+  margin: 0;
+  font-family: "JetBrains Mono", "Consolas", monospace;
+  color: #475569;
+  font-size: 12px;
+}
+
 .result-meta {
   margin: 4px 0 8px;
   color: #475569;
   font-size: 14px;
+}
+
+.result-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 0 0 var(--space-2);
+}
+
+.result-tag {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  border: 1px solid rgba(100, 116, 139, 0.35);
+  color: #334155;
+  padding: 3px 8px;
+  font-size: 11px;
+  line-height: 1.2;
+  background: rgba(248, 250, 252, 0.92);
 }
 
 .result-card ul {
@@ -221,14 +308,14 @@ h1 span {
 .workspace-grid {
   display: grid;
   grid-template-columns: minmax(320px, 420px) minmax(0, 1fr);
-  gap: 20px;
+  gap: var(--space-4);
   align-items: start;
 }
 
 .layout-card {
-  padding: 20px 22px;
+  padding: var(--space-4) var(--space-5);
   background: rgba(255, 255, 255, 0.8);
-  border-radius: 16px;
+  border-radius: var(--radius-lg);
   border: 1px solid rgba(148, 163, 184, 0.25);
   backdrop-filter: blur(8px);
 }
@@ -236,12 +323,12 @@ h1 span {
 .layout-head {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
   gap: 16px;
 }
 
 .layout-head h2 {
-  margin: 0 0 8px;
+  margin: 0;
   font-size: 18px;
 }
 
@@ -256,7 +343,7 @@ h1 span {
 .legend-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(130px, 1fr));
-  gap: 6px 14px;
+  gap: 6px 12px;
 }
 
 .legend-swatch {
@@ -288,8 +375,58 @@ h1 span {
   color: #475569;
 }
 
+.state-card {
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(148, 163, 184, 0.35);
+  background: #fff;
+  padding: var(--space-3);
+}
+
+.state-title {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.state-text {
+  margin: 4px 0 0;
+  color: #475569;
+  font-size: 14px;
+}
+
+.state-card.loading {
+  background: rgba(248, 250, 252, 0.9);
+}
+
+.state-card.error {
+  background: rgba(254, 242, 242, 0.9);
+  border-color: rgba(239, 68, 68, 0.4);
+}
+
+.state-card.empty {
+  background: rgba(255, 251, 235, 0.85);
+  border-color: rgba(245, 158, 11, 0.4);
+}
+
+.state-card.initial {
+  background: rgba(239, 246, 255, 0.85);
+  border-color: rgba(59, 130, 246, 0.3);
+}
+
+.secondary-button {
+  margin-top: var(--space-3);
+  border: 1px solid rgba(100, 116, 139, 0.45);
+  border-radius: 8px;
+  background: #fff;
+  color: #0f172a;
+  font-size: 13px;
+  padding: 8px 12px;
+  cursor: pointer;
+}
+
 .layout-canvas {
-  margin-top: 12px;
+  margin-top: var(--space-3);
   overflow-x: auto;
   border: 1px solid rgba(148, 163, 184, 0.25);
   border-radius: 12px;
@@ -347,7 +484,11 @@ h1 span {
   .status-card {
     flex-direction: column;
     align-items: flex-start;
-    gap: 12px;
+    gap: var(--space-3);
+  }
+
+  .hero-stats {
+    width: 100%;
   }
 
   .search-form {
@@ -360,5 +501,10 @@ h1 span {
 
   .legend-grid {
     grid-template-columns: 1fr;
+  }
+
+  .layout-head {
+    flex-direction: column;
+    align-items: flex-start;
   }
 }
